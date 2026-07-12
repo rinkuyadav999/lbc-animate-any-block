@@ -1,0 +1,68 @@
+/**
+ * LBC Animate Any Block — Block Editor Styles
+ *
+ * These styles are loaded only in the Gutenberg block editor (not on the front
+ * end). They provide a visual indicator so authors can see at a glance which
+ * blocks have AOS animation enabled.
+ *
+ * @package LBC_Animate_Any_Block
+ */
+
+
+
+/* ── Panel styles ────────────────────────────────────────────────────────────── */
+
+.lbc-aab-panel .components-panel__body-title button {
+	font-weight: 600;
+}
+
+/**
+ * Section sub-headings inside the panel (Timing, Trigger, Style & Behaviour).
+ */
+.lbc-aab-section-label {
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: #757575;
+	margin: 12px 0 8px;
+}
+
+/**
+ * Thin divider line between setting groups.
+ */
+.lbc-aab-divider {
+	border: none;
+	border-top: 1px solid #e0e0e0;
+	margin: 12px 0;
+}
+
+/**
+ * Hint text shown when animation is enabled but no type is selected yet.
+ */
+.lbc-aab-hint {
+	font-size: 12px;
+	color: #757575;
+	background: #f0f6fc;
+	border-left: 3px solid #3858e9;
+	padding: 8px 10px;
+	border-radius: 0 4px 4px 0;
+	margin: 4px 0 8px;
+}
+
+/**
+ * Summary badge displayed at the bottom of the panel showing active settings
+ * at a glance (e.g. "fade-up · 800ms · once").
+ */
+.lbc-aab-summary-badge {
+	display: inline-block;
+	font-size: 11px;
+	font-family: monospace;
+	background: #f0f4ff;
+	color: #3858e9;
+	border: 1px solid #c7d3ff;
+	border-radius: 4px;
+	padding: 4px 8px;
+	margin-top: 8px;
+	word-break: break-all;
+}

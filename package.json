@@ -1,0 +1,19 @@
+{
+  "name": "lbc-animate-any-block",
+  "version": "1.0.0",
+  "description": "WordPress plugin: AOS animation controls for all core Gutenberg blocks",
+  "private": true,
+  "scripts": {
+    "prebuild":  "node -e \"const fs=require('fs');fs.rmSync('build',{recursive:true,force:true});fs.mkdirSync('build',{recursive:true});\"",
+    "build":      "wp-scripts build",
+    "start":      "wp-scripts start",
+    "format":     "wp-scripts format",
+    "lint:js":    "wp-scripts lint-js",
+    "lint:css":   "wp-scripts lint-style",
+    "zip":        "powershell -ExecutionPolicy Bypass -File ./build-zip.ps1",
+    "build:zip":  "npm run build && powershell -ExecutionPolicy Bypass -File ./build-zip.ps1"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.0.0"
+  }
+}
