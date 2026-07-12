@@ -66,8 +66,9 @@ final class LBC_AAB_Plugin {
 		_doing_it_wrong(
 			__FUNCTION__,
 			esc_html__( 'Unserializing instances of LBC_AAB_Plugin is forbidden.', 'lbc-animate-any-block' ),
-			'1.0'
+			esc_html( LBC_AAB_VERSION )
 		);
+		throw new \Exception( esc_html__( 'Unserializing instances of LBC_AAB_Plugin is forbidden.', 'lbc-animate-any-block' ) );
 	}
 
 	// ──────────────────────────────────────────────────────────────────────────
@@ -116,6 +117,10 @@ final class LBC_AAB_Plugin {
 	 * @return array Modified array of allowed HTML tags.
 	 */
 	public function whitelist_aos_attributes( $tags, $context ) {
+		// Intentionally not scoped to a specific context: blocks can appear in any
+		// post type (e.g. WooCommerce product descriptions, widget areas, custom
+		// fields), so AOS attributes must be allowed in all wp_kses_allowed_html()
+		// call sites, not just 'post'.
 		if ( ! is_array( $tags ) ) {
 			return $tags;
 		}
@@ -144,6 +149,7 @@ final class LBC_AAB_Plugin {
 
 		return $tags;
 	}
+	
 	/**
 	 * Enqueue the compiled block editor script and editor-only stylesheet.
 	 *
@@ -161,7 +167,7 @@ final class LBC_AAB_Plugin {
 		$asset = require $asset_file;
 
 		// Validate the asset manifest returned an array with required keys.
-		if ( ! is_array( $asset ) || empty( $asset['dependencies'] ) || empty( $asset['version'] ) ) {
+		if ( ! is_array( $asset ) || ! isset( $asset['dependencies'], $asset['version'] ) ) {
 			return;
 		}
 
@@ -177,7 +183,7 @@ final class LBC_AAB_Plugin {
 		// Set script translations (WordPress resolves the path automatically).
 		wp_set_script_translations(
 			'lbc-aab-editor',
-			LBC_AAB_TEXT_DOMAIN
+			'lbc-animate-any-block'
 		);
 
 		// Editor-only styles (animation indicator badge, panel tweaks).
@@ -195,7 +201,7 @@ final class LBC_AAB_Plugin {
 			array(
 				'version'    => LBC_AAB_VERSION,
 				'pluginUrl'  => LBC_AAB_PLUGIN_URL,
-				'textDomain' => LBC_AAB_TEXT_DOMAIN,
+				'textDomain' => 'lbc-animate-any-block',
 			)
 		);
 	}
@@ -212,7 +218,7 @@ final class LBC_AAB_Plugin {
 			'lbc-aab-aos',
 			LBC_AAB_PLUGIN_URL . 'vendor/aos/aos.min.css',
 			array(),
-			LBC_AAB_VERSION
+			'2.3.4'
 		);
 
 		// AOS JavaScript library (no dependencies; must load before frontend init).
@@ -220,7 +226,7 @@ final class LBC_AAB_Plugin {
 			'lbc-aab-aos',
 			LBC_AAB_PLUGIN_URL . 'vendor/aos/aos.min.js',
 			array(),
-			LBC_AAB_VERSION,
+			'2.3.4',
 			true // Load in footer.
 		);
 
@@ -287,9 +293,9 @@ final class LBC_AAB_Plugin {
 			$data_attrs['data-aos-delay'] = absint( $attrs['lbcAosDelay'] );
 		}
 
-		// Optional: offset (px). 0 is valid; only skip if not set.
+		// Optional: offset (px). 0 is valid and negative values are supported by AOS.
 		if ( isset( $attrs['lbcAosOffset'] ) && is_numeric( $attrs['lbcAosOffset'] ) ) {
-			$data_attrs['data-aos-offset'] = absint( $attrs['lbcAosOffset'] );
+			$data_attrs['data-aos-offset'] = intval( $attrs['lbcAosOffset'] );
 		}
 
 		// Optional: easing function name.

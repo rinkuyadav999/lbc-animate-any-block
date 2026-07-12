@@ -4,7 +4,7 @@ Donate link: https://rinkuyadav.in
 Tags:              animation, animate on scroll, AOS, block editor, gutenberg
 Requires at least: 6.2
 Tested up to:      7.0
-Stable tag:        1.0
+Stable tag:        1.1
 Requires PHP:      7.4
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,6 +35,10 @@ Bring your pages to life without writing a single line of code. Simply select an
 == Credits ==
 
 * **AOS Library:** This plugin bundles the [AOS – Animate On Scroll](https://github.com/michalsnik/aos) library created by Michał Sajnóg, which is distributed under the [MIT License](https://opensource.org/licenses/MIT).
+
+== GitHub Repo ==
+
+[LBC Animate Any Block](https://github.com/rinkuyadav999/lbc-animate-any-block)
 
 == Installation ==
 
@@ -78,6 +82,13 @@ Animations are intentionally **not previewed** inside the editor. This prevents 
 
 == Changelog ==
 
+= 1.1 =
+* Fix plugin review
+* Avail both min and non-min
+* Fix readme: installation section
+* GPL license ready check
+* Provide a public source code: added in readme GitHub Repo
+
 = 1.0 =
 * Initial release.
 * 28 AOS animation types & 20 easing functions.
@@ -85,6 +96,9 @@ Animations are intentionally **not previewed** inside the editor. This prevents 
 * AOS 2.3.4 bundled locally.
 
 == Upgrade Notice ==
+
+= 1.1 =
+Initial release.
 
 = 1.0 =
 Initial release.

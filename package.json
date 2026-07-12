@@ -1,6 +1,6 @@
 {
   "name": "lbc-animate-any-block",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "WordPress plugin: AOS animation controls for all core Gutenberg blocks",
   "private": true,
   "scripts": {

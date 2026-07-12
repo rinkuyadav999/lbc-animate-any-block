@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       LBC Animate Any Block
  * Description:       Add AOS (Animate On Scroll) effects to any WordPress block. Easily configure scroll-triggered animations directly from the block editor sidebar.
- * Version:           1.0
+ * Version:           1.1
  * Requires at least: 6.2
  * Requires PHP:      7.4
  * Author:            rinkuyadav999
@@ -22,29 +22,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Plugin constants
 // ──────────────────────────────────────────────────────────────────────────────
 
-/** Plugin version. */
-define( 'LBC_AAB_VERSION', '1.0' );
+if ( ! defined( 'LBC_AAB_VERSION' ) ) {
+	$lbc_aab_data = get_file_data( __FILE__, [ 'Version' => 'Version' ] );
+	define( 'LBC_AAB_VERSION', $lbc_aab_data['Version'] );
+	unset( $lbc_aab_data );
+}
 
-/** Absolute path to the plugin root directory (trailing slash). */
-define( 'LBC_AAB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+if ( ! defined( 'LBC_AAB_MIN_WP' ) || ! defined( 'LBC_AAB_MIN_PHP' ) ) {
+	$lbc_aab_req = get_file_data(
+		__FILE__,
+		[
+			'MinWP'  => 'Requires at least',
+			'MinPHP' => 'Requires PHP',
+		]
+	);
+	if ( ! defined( 'LBC_AAB_MIN_WP' ) ) {
+		define( 'LBC_AAB_MIN_WP', $lbc_aab_req['MinWP'] );
+	}
+	if ( ! defined( 'LBC_AAB_MIN_PHP' ) ) {
+		define( 'LBC_AAB_MIN_PHP', $lbc_aab_req['MinPHP'] );
+	}
+	unset( $lbc_aab_req );
+}
 
-/** URL to the plugin root directory (trailing slash). */
-define( 'LBC_AAB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'LBC_AAB_PLUGIN_DIR' ) ) {
+	/** Absolute path to the plugin root directory (trailing slash). */
+	define( 'LBC_AAB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+}
 
-/** Absolute path to the main plugin file. */
-define( 'LBC_AAB_PLUGIN_FILE', __FILE__ );
+if ( ! defined( 'LBC_AAB_PLUGIN_URL' ) ) {
+	/** URL to the plugin root directory (trailing slash). */
+	define( 'LBC_AAB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+}
 
-/** Plugin text domain. */
-define( 'LBC_AAB_TEXT_DOMAIN', 'lbc-animate-any-block' );
+if ( ! defined( 'LBC_AAB_PLUGIN_FILE' ) ) {
+	/** Absolute path to the main plugin file. */
+	define( 'LBC_AAB_PLUGIN_FILE', __FILE__ );
+}
 
-/** Minimum required WordPress version. */
-define( 'LBC_AAB_MIN_WP', '6.2' );
-
-/** Minimum required PHP version. */
-define( 'LBC_AAB_MIN_PHP', '7.4' );
-
-/** Basename of the plugin (used for activation/deactivation hooks). */
-define( 'LBC_AAB_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+if ( ! defined( 'LBC_AAB_PLUGIN_BASENAME' ) ) {
+	/** Basename of the plugin (used for activation/deactivation hooks). */
+	define( 'LBC_AAB_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+}
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Version checks
